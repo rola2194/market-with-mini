@@ -48,6 +48,13 @@ h2{
     }
     button{
         background-color: #ae7a83;
+        transition: background-color .35s;
+
+    }
+    button:active{
+        background-color: #7aae97;
+        transition: background-color 0s;
+
     }
     ul{
         list-style: none;
