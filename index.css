@@ -29,8 +29,8 @@ h2{
 
     .image{
         width: 60px;
-        margin-bottom: -5px;
-        margin-top: 0;
+        margin-bottom: 2px;
+        margin-top: 2px;
     }
 
     button, input{
@@ -46,9 +46,19 @@ h2{
         background-color: #c14e61;
     }
     ul{
-        width: 50%;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(70% + 10px);
         font-size: 15px;
-        color: #bc001f;
+        color: #fdeaee;
         margin-bottom: 5px;
+    }
+    li{
+        background-color: #c14e61;
+        margin: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 2px solid rgb(90, 8, 8);
     }
 }

@@ -1,6 +1,6 @@
 //#region initialization firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js';
-import { getDatabase, ref, push, onValue } from 'https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js';
+import { getDatabase, ref, push, onValue, set} from 'https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js';
 
 const firebaseConfig = {
   // ...
@@ -19,6 +19,7 @@ const weightDB = ref(database, "weight");
 const input = document.querySelector("#input");
 const btn = document.querySelector("#submit");
 const ul = document.querySelector("ul");
+const cat = document.querySelector('img')
 //#endregion ////////////////////////////////////////////////////////////////////////////////////
 
 function addItemsToUI(inputValue) {
@@ -27,6 +28,7 @@ function addItemsToUI(inputValue) {
   ul.appendChild(li);
   console.log(inputValue);
 }
+//#region events listeners
 btn.addEventListener("click", () => {
     const inputValue = input.value;
 
@@ -36,9 +38,14 @@ btn.addEventListener("click", () => {
     input.value = "";
 });
 
+cat.addEventListener('click',()=>{
+    set(weightDB,'')
+})
+
+//#endregion
 onValue(weightDB,(data)=>{
   if (!data.val()){
-    push(weightDB,'')
+    set(weightDB,'')
   }
   const arr = Object.values(data.val())
   ul.innerHTML = ''
