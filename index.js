@@ -31,36 +31,38 @@ function addItemsToUI(inputValue,key) {
   })
   ul.appendChild(li);
 }
+function registerItemToDBEvent(){
+  const inputValue = input.value;
+
+  //(to the db) (val. of input)
+  push(weightDB, inputValue);
+
+  input.value = "";
+}
 //#region events listeners
-btn.addEventListener("click", () => {
-    const inputValue = input.value;
-
-    //(to the db) (val. of input)
-    push(weightDB, inputValue);
-
-    input.value = "";
-});
-
-cat.addEventListener('click',()=>{
+btn.addEventListener("click", registerItemToDBEvent);
+input.addEventListener('keypress',(e)=>{
+  alert(e.key)
+  if (e.key === 'Enter'){
+    registerItemToDBEvent()
+  }
+})
+cat.addEventListener('dblclick',()=>{
     set(weightDB,'')
 })
-
-
 //#endregion
+
 onValue(weightDB,(data)=>{
-  if (!data.val()){
-    set(weightDB,'')
+  ul.innerHTML = ''
+  if (data.val()){
+    
+    const arr = Object.entries(data.val())
+    console.log(arr)
+    for(let [key,value] of arr){
+      addItemsToUI(value,key)
    
   }
-  ul.innerHTML = ''
-  const arr = Object.entries(data.val())
-  console.log(arr)
-  for(let [key,value] of arr){
-    addItemsToUI(value,key)
   }
 
   
 })
-// set(weightDB,{
-//   asd
-// })
