@@ -1,6 +1,6 @@
 //#region initialization firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js';
-import { getDatabase, ref, push, onValue, set} from 'https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js';
+import { getDatabase, ref, push, onValue, set, remove} from 'https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js';
 
 const firebaseConfig = {
   // ...
@@ -22,11 +22,14 @@ const ul = document.querySelector("ul");
 const cat = document.querySelector('img')
 //#endregion ////////////////////////////////////////////////////////////////////////////////////
 
-function addItemsToUI(inputValue) {
-  const li = document.createElement("li");    
+function addItemsToUI(inputValue,key) {
+  const li = document.createElement("li");
   li.innerText = inputValue;
+  li.addEventListener('click',()=>{
+    let itemInDB = ref(database, `weight/${key}`)
+    remove(itemInDB)
+  })
   ul.appendChild(li);
-  console.log(inputValue);
 }
 //#region events listeners
 btn.addEventListener("click", () => {
@@ -42,16 +45,22 @@ cat.addEventListener('click',()=>{
     set(weightDB,'')
 })
 
+
 //#endregion
 onValue(weightDB,(data)=>{
   if (!data.val()){
     set(weightDB,'')
+   
   }
-  const arr = Object.values(data.val())
   ul.innerHTML = ''
-  for(let x of arr){
-    addItemsToUI(x)
-    console.log(x)
-  }
+  const arr = Object.entries(data.val())
   console.log(arr)
+  for(let [key,value] of arr){
+    addItemsToUI(value,key)
+  }
+
+  
 })
+// set(weightDB,{
+//   asd
+// })
