@@ -42,7 +42,6 @@ function registerItemToDBEvent(){
 //#region events listeners
 btn.addEventListener("click", registerItemToDBEvent);
 input.addEventListener('keypress',(e)=>{
-  alert(e.key)
   if (e.key === 'Enter'){
     registerItemToDBEvent()
   }
