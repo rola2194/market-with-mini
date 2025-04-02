@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+html{
+    touch-action: none;
+
+}
 body{
     user-select: none;
     display: flex;
@@ -10,7 +14,6 @@ body{
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    touch-action: none;
 
 }
 h2{
