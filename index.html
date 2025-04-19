@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>authentication</title>
+    <link rel="stylesheet" href="index.css" />
+    <script type="module" src="initialization.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="logic.js"></script>
+  </head>
+  <body>
+    <div class="initial-login">
+      <h2>Welcome</h2>
+      <div class="card">
+        <img class="image" src="image.png" alt="" />
+        <button>Login</button>
+        <button id="googleLogin">Login with Google</button>
+      </div>
+    </div>
+    <div class="loggedin" style="display: none">
+      <body>
+        <h2>Market with Mini</h2>
+        <div class="card">
+          <div class="sign">
+            <button id="signIn">Sign in</button>
+            <button id="logOut">Log Out</button>
+          </div>
+          <img class="image" src="image.png" alt="" />
+          <input type="text" id="input" placeholder="Type something..." />
+          <button id="submit">Submit</button>
+          <ul></ul>
+        </div>
+      </body>
+    </div>
+  </body>
+</html>
