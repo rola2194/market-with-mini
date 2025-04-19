@@ -2,9 +2,9 @@
 const input = document.querySelector("#input");
 const btn = document.querySelector("#submit");
 const ul = document.querySelector("ul");
-const cat = document.querySelector("img");
-const signInBtn = document.querySelector("#signIn");
+const cat = document.querySelector(".loggedinCat");
 const logOutBtn = document.querySelector("#logOut");
+const clearMessage = document.querySelector(".clear-message");
 //#endregion
 import {
   database,
@@ -15,6 +15,7 @@ import {
   remove,
   onAuthStateChanged,
   push,
+  set,
 } from "./initialization.js";
 let listDB;
 
@@ -37,9 +38,26 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+// Show and fade out the clear message
+function showClearMessage() {
+  clearMessage.classList.remove("fade-out");
+
+  setTimeout(() => {
+    clearMessage.classList.add("fade-out");
+  }, 3000); // Start fading after 3 second
+  // setTimeout(() => {
+  //   clearMessage.style.display = "none";
+  // }, 5000);
+}
+
+// Call this function when the user logs in
 function successfullAuth(uid) {
   listDB = ref(database, `list/${uid}`);
   console.log("User is signed in:", uid);
+
+  // Show the clear message when user logs in
+  showClearMessage();
+
   onValue(listDB, (data) => {
     ul.innerHTML = "";
     if (data.val()) {
@@ -51,6 +69,7 @@ function successfullAuth(uid) {
     }
   });
 }
+
 function addItemToDB() {
   const inputValue = input.value;
 
@@ -71,3 +90,11 @@ function addItemsToUI(inputValue, key) {
   });
   ul.appendChild(li);
 }
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    addItemToDB();
+  }
+});
+cat.addEventListener("dblclick", () => {
+  set(listDB, "");
+});
